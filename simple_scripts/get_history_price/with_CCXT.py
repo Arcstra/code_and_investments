@@ -7,7 +7,8 @@ binance = ccxt.binance()  # Выбираем биржу Binance
 data_btc = binance.fetch_ohlcv(
     symbol="BTC/USDT",  # Биткоина к доллару
     timeframe="4h",  # Продолжительность каждой свечи равна 4 часам
-    since=int(datetime.datetime(2025, 3, 1).timestamp()) * 1000,  # С начала марта
+    # С 1-го дня марта в 00:00 в UTC+0 поясе
+    since=int(datetime.datetime(2025, 3, 1).timestamp()) * 1000,
     limit=42)  # За неделю (24 / 4 * 7 = 42)
 
 for candle in data_btc:
