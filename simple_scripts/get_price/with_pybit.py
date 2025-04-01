@@ -1,7 +1,8 @@
 from pybit.unified_trading import WebSocket
 
 def handle_message(message):
-    print("Новые данные:", message["data"][0]["close"])
+    # Выводим текущую цену Биткоина
+    print(message["data"][0]["close"])
 
 ws = WebSocket(
     testnet=False,  # Для mainnet используйте False
@@ -12,5 +13,9 @@ ws = WebSocket(
 ws.kline_stream("15", "BTCUSDT", handle_message)
 
 # Для поддержания соединения
-while True:
-    True
+try:
+    while True:
+        True
+except KeyboardInterrupt:  # Ctrl+C
+    print("STOP!!!")
+    ws.exit()  # Закрываем соединение с биржой
